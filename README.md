@@ -78,3 +78,70 @@ bool MyLineEdit:: event(QEvent *event)
 先是事件过滤器，然后是焦点部件的event()函数，最后是焦点部件的事件处理函数；如果焦点部件忽略了该事件，那么会执行父部件的事件处理函数。
 
 ![avatra](https://github.com/CodingManPP/0005_Qt_QEvent/blob/master/_002_QEvent/myevent/%E4%BA%8B%E4%BB%B6%E4%BC%A0%E9%80%92%E6%9C%BA%E5%88%B6%E7%A4%BA%E6%84%8F%E5%9B%BE.png)
+
+##【鼠标事件】
+### 003_QMouseEvent
+鼠标事件：
+【1】点击左键，鼠标箭头变为小拳头。
+【2】双击：窗口放大
+【3】右击:鼠标箭头变为图片，但是没有成功
+【4】滚轮：Text中的字体大小改变
+【5】设置鼠标追踪，没有生效，待查问题
+```
+/* 鼠标单击--按下事件*/
+void Widget::mousePressEvent(QMouseEvent *event)
+{
+     if (event->button() == Qt::LeftButton){
+         QCursor cursor;
+         cursor.setShape(Qt::ClosedHandCursor);             //鼠标暂时改变形状
+         QApplication::setOverrideCursor(cursor);
+         offset = event->globalPos() - pos();               //获取指针的位置和窗口位置的差值
+     }else if(event->button() == Qt::RightButton){          //鼠标右键按下
+         QCursor cursor(QPixmap("../mymouseevent/logo.png"));  //使用图片会报错：QCursor: Cannot create bitmap cursor; invalid bitmap(s)
+         QApplication::setOverrideCursor(cursor);           //使用鼠标自定义的图片作为鼠标指针
+
+     }
+}
+
+/* 鼠标移动事件*/
+void Widget::mouseMoveEvent(QMouseEvent *event)
+{
+    if (event->buttons() & Qt::LeftButton){             //此处必须使用buttons，鼠标移动时会检测所有按下的键
+        QPoint temp;
+        temp = event->globalPos() - offset;             //使用鼠标指针当前的位置减去差值得到窗口应该移动的位置
+        move(temp);
+    }
+}
+
+/* 鼠标单击--松开事件*/
+void Widget::mouseReleaseEvent(QMouseEvent *event)
+{
+    Q_UNUSED(event);
+    QApplication::restoreOverrideCursor();              //恢复指标的形状
+}
+
+/* 鼠标双击事件*/
+void Widget::mouseDoubleClickEvent(QMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton){                 //鼠标左键按下
+        if (windowState() != Qt::WindowFullScreen){         //全屏显示
+            setWindowState(Qt::WindowFullScreen);
+        }else {
+            setWindowState(Qt::WindowNoState);
+        }
+    }
+}
+
+
+/* 鼠标滚轮事件*/
+void Widget::wheelEvent(QWheelEvent *event)
+{
+    if (event->delta() > 0){
+        ui->textEdit->zoomIn();                     //字体放大
+        qDebug()<<tr("鼠标滚轮值：")<<event->delta();   //120
+    }else {
+        ui->textEdit->zoomOut();                    //字体缩小
+    }
+}
+```
+
