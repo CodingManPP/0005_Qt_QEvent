@@ -68,8 +68,11 @@ bool MyLineEdit:: event(QEvent *event)
 }
 ```
 运行结果如下：
+
 ![avatar](https://github.com/CodingManPP/0005_Qt_QEvent/blob/master/_002_QEvent/myevent/%E4%BA%8B%E4%BB%B6%E4%BC%A0%E9%80%92%E5%AE%9E%E4%BE%8B2.png)
 * 事件过滤机制如下：
+
 事件的传递顺序如下：
+
 先是事件过滤器，然后是焦点部件的event()函数，最后是焦点部件的事件处理函数；如果焦点部件忽略了该事件，那么会执行父部件的事件处理函数。
 ![avatra](https://github.com/CodingManPP/0005_Qt_QEvent/blob/master/_002_QEvent/myevent/%E4%BA%8B%E4%BB%B6%E4%BC%A0%E9%80%92%E6%9C%BA%E5%88%B6%E7%A4%BA%E6%84%8F%E5%9B%BE.png)
