@@ -269,6 +269,7 @@ void Widget::timerUpdate()
 }
 
 ```
+![avatar](https://github.com/CodingManPP/0005_Qt_QEvent/blob/master/_006_QTimer/mytimerevent/%E6%97%B6%E9%92%9F%E6%98%BE%E7%A4%BA%E6%95%88%E6%9E%9C%E5%9B%BE.png)
 
 
 
