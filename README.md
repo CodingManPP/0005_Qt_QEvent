@@ -325,6 +325,16 @@ bool Widget::eventFilter(QObject *watched, QEvent *event)
 }
 ```
 ### 事件的发送
-
+```
+   /**
+     * 发送事件的另外一种方法
+     * @brief myEvent
+     * @return
+     */
+    QKeyEvent myEvent(QEvent::KeyPress,Qt::Key_Up,Qt::NoModifier);          //此操作：模仿了按下Key_Up键
+    for (int i=0 ; i<10; i++){
+        qApp->sendEvent(ui->spinBox,&myEvent);   //发送键盘事件到spinBox
+    }
+ ```
 
 
