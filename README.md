@@ -79,7 +79,7 @@ bool MyLineEdit:: event(QEvent *event)
 
 ![avatra](https://github.com/CodingManPP/0005_Qt_QEvent/blob/master/_002_QEvent/myevent/%E4%BA%8B%E4%BB%B6%E4%BC%A0%E9%80%92%E6%9C%BA%E5%88%B6%E7%A4%BA%E6%84%8F%E5%9B%BE.png)
 
-## 【鼠标事件】
+## 【2】【鼠标事件】
 ###  003_QMouseEvent
 鼠标事件：
 【1】点击左键，鼠标箭头变为小拳头。
