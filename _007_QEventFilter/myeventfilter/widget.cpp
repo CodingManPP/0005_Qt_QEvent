@@ -12,6 +12,16 @@ Widget::Widget(QWidget *parent) :
 
     ui->textEdit->installEventFilter(this);        //为编辑器textEdit部件在本窗口安装事件过滤器
     ui->spinBox->installEventFilter(this);         //为spinBox在本窗口安装事件过滤器
+
+    /**
+     * 发送事件的另外一种方法
+     * @brief myEvent
+     * @return
+     */
+    QKeyEvent myEvent(QEvent::KeyPress,Qt::Key_Up,Qt::NoModifier);          //次操作：模仿了按下Key_Up键
+    for (int i=0 ; i<10; i++){
+        qApp->sendEvent(ui->spinBox,&myEvent);   //发送键盘事件到spinBox
+    }
 }
 
 Widget::~Widget()
